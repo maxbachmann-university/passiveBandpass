@@ -5,8 +5,6 @@
 
 class Capacitor : public Component {
 public:
-  Capacitor(double value) : Component() {
-    m_value = value;
-  }
+  Capacitor(double value) : Component(value) {}
 };
 #endif //CAPACITOR_HPP
