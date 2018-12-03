@@ -9,10 +9,12 @@ public:
   Component(const Component&) = default; // Defining a move constructor disables the default copy constructor ...
   Component& operator=(const Component&) = default; // ... and the corresponding assignment operator
 
-  double returnValue() {return m_value; }
+  double returnValue() {return m_value; } const
+  void setValue(double value) { m_value = value; }
 
 protected:
-  Component();
-  double m_value;
+  Component() {};
+  Component(double value) : m_value(value) {};
+  double m_value = 0;
 };
 #endif //COMPONENT_HPP

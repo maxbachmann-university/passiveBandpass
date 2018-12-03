@@ -5,8 +5,6 @@
 
 class Inductor : public Component {
 public:
-  Inductor(double value) : Component() {
-    m_value = value;
-  }
+  Inductor(double value) : Component(value) {}
 };
 #endif //INDUCTOR_HPP

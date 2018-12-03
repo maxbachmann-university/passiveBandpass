@@ -5,8 +5,6 @@
 
 class Resistor : public Component {
 public:
-  Resistor(double value) : Component() {
-    m_value = value;
-  }
+  Resistor(double value) : Component(value) {}
 };
 #endif //RESISTOR_HPP
