@@ -1,6 +1,6 @@
-#include "Resistor.hpp"
-#include "Capacitor.hpp"
-#include "Inductor.hpp"
+#include "../Components/Resistor.hpp"
+#include "../Components/Capacitor.hpp"
+#include "../Components/Inductor.hpp"
 #include <memory>
 #include <math.h>
 #define PI 3.14159265358979323846  /* pi */

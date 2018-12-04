@@ -32,3 +32,6 @@
 #Visual Studio Code Folder
 .vscode/
 
+#Makefile
+makefile
+Test

@@ -15,6 +15,9 @@ public:
 protected:
   Component() {};
   Component(double value) : m_value(value) {};
+
+private:
   double m_value = 0;
+
 };
 #endif //COMPONENT_HPP
