@@ -1,7 +1,7 @@
-#include "HighPass.hpp"
-
 #ifndef CLHIGHPASS_HPP
 #define CLHIGHPASS_HPP
+
+#include "HighPass.hpp"
 
 class CLHighPass: public HighPass {
 public:

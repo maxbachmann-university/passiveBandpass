@@ -1,12 +1,12 @@
-#include "HighPass.hpp"
-
 #ifndef CRHIGHPASS_HPP
 #define CRHIGHPASS_HPP
+
+#include "HighPass.hpp"
 
 class CRHighPass: public HighPass {
 public:
   double Frequency() const override {
-      return m_secondComponent->returnValue() / ( 2 * PI * m_firstComponent->returnValue() );
+      return 1 / ( 2 * PI * m_firstComponent->returnValue() * m_secondComponent->returnValue() );
   }
 
   CRHighPass(double firstComponent, double secondComponent) : HighPass() {

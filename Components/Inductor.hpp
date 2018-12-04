@@ -1,7 +1,7 @@
-#include "Component.hpp"
-
 #ifndef INDUCTOR_HPP
 #define INDUCTOR_HPP
+
+#include "Component.hpp"
 
 class Inductor : public Component {
 public:

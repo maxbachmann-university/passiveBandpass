@@ -1,7 +1,10 @@
-#include "Filter.hpp"
-
 #ifndef HIGHPASS_HPP
 #define HIGHPASS_HPP
+
+#include "Filter.hpp"
+#include "LowPass.hpp"
+
+class Bandpass;
 
 class HighPass: public Filter {
 public:
@@ -11,6 +14,9 @@ public:
   HighPass(const HighPass&) = default; // Defining a move constructor disables the default copy constructor ...
   HighPass& operator=(const HighPass&) = default; // ... and the corresponding assignment operator
 
+  friend std::unique_ptr<Bandpass> operator+ (std::shared_ptr<HighPass> const highPass, std::shared_ptr<LowPass> const lowPass) {
+      return std::make_unique<Bandpass>(lowPass, highPass);
+  }
 
   virtual double Frequency() const = 0;
 
