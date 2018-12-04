@@ -1,7 +1,7 @@
-#include "LowPass.hpp"
-
 #ifndef LRLOWPASS_HPP
 #define LRLOWPASS_HPP
+
+#include "LowPass.hpp"
 
 class LRLowPass: public LowPass {
 public:
@@ -13,5 +13,6 @@ public:
       m_firstComponent = std::make_unique<Inductor>(firstComponent);
       m_secondComponent = std::make_unique<Resistor>(secondComponent);
   }
+
 };
 #endif //LRLOWPASS_HPP

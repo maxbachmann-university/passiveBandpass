@@ -1,7 +1,7 @@
-#include "Component.hpp"
-
 #ifndef CAPACITOR_HPP
 #define CAPACITOR_HPP
+
+#include "Component.hpp"
 
 class Capacitor : public Component {
 public:
