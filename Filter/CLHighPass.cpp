@@ -1,3 +1,4 @@
+/** @file */
 #include "CLHighPass.hpp"
 
 CLHighPass::CLHighPass(

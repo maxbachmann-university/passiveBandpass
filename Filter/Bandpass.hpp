@@ -1,3 +1,4 @@
+/** @file */
 #ifndef BANDPASS_HPP
 #define BANDPASS_HPP
 

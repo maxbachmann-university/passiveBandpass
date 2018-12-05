@@ -1,3 +1,4 @@
+/** @file */
 #include "Bandpass.hpp"
 #include "LowPass.hpp"
 #include "HighPass.hpp"
