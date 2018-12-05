@@ -1,13 +1,17 @@
 #ifndef COMPONENT_HPP
 #define COMPONENT_HPP
 
-class Component {
+#include <memory>
+class Capacitor;
+
+class Component 
+{
 public:
-  virtual ~Component() = default; // Virtual destructor needed, because the derived classes are only accessed via a pointer to this class
-  Component(Component&&) = default; // Defining a destructor disables the default move constructor ...
-  Component& operator=(Component&&) = default; // ... and the corresponding assignment operator
-  Component(const Component&) = default; // Defining a move constructor disables the default copy constructor ...
-  Component& operator=(const Component&) = default; // ... and the corresponding assignment operator
+  virtual ~Component() = default;
+  Component(Component&&) = default;
+  Component& operator=(Component&&) = default;
+  Component(const Component&) = default;
+  Component& operator=(const Component&) = default;
 
   double returnValue() {return m_value; } const
   void setValue(double value) { m_value = value; }

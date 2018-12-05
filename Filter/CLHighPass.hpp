@@ -3,13 +3,17 @@
 
 #include "HighPass.hpp"
 
-class CLHighPass: public HighPass {
+class CLHighPass: public HighPass 
+{
 public:
-  double Frequency() const override {
-      return m_secondComponent->returnValue() / ( 2 * PI * m_firstComponent->returnValue() );
+  double Frequency() const override 
+  {
+      return m_secondComponent->returnValue() 
+        / (2 * PI * m_firstComponent->returnValue());
   }
 
-  CLHighPass(double firstComponent, double secondComponent) : HighPass() {
+  CLHighPass(double firstComponent, double secondComponent) : HighPass() 
+  {
       m_firstComponent = std::make_unique<Capacitor>(firstComponent);
       m_secondComponent = std::make_unique<Inductor>(secondComponent);
   }
