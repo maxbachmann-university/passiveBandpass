@@ -1,0 +1,15 @@
+language: cpp
+
+compiler:
+  - gcc
+
+before_install:
+  - sudo apt-get install valgrind
+
+addons:
+  apt:
+    update: true
+
+script:
+  - g++ -o travis_gcc_cpp17 Catch2.cpp Components/*.cpp Filter/*.cpp -std=c++17
+  -   valgrind --leak-check=yes ./travis_gcc_cpp17
