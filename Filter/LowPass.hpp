@@ -4,18 +4,23 @@
 #include "Filter.hpp"
 #include "HighPass.hpp"
 
+class HighPass;
 class Bandpass;
 
-class LowPass: public Filter {
+class LowPass: public Filter 
+{
 public:
-  virtual ~LowPass() = default; // Virtual destructor needed, because the derived classes are only accessed via a pointer to this class
-  LowPass(LowPass&&) = default; // Defining a destructor disables the default move constructor ...
-  LowPass& operator=(LowPass&&) = default; // ... and the corresponding assignment operator
-  LowPass(const LowPass&) = default; // Defining a move constructor disables the default copy constructor ...
-  LowPass& operator=(const LowPass&) = default; // ... and the corresponding assignment operator
+  virtual ~LowPass() = default;
+  LowPass(LowPass&&) = default;
+  LowPass& operator=(LowPass&&) = default;
+  LowPass(const LowPass&) = default;
+  LowPass& operator=(const LowPass&) = default;
 
-  friend std::unique_ptr<Bandpass> operator+ (std::shared_ptr<LowPass> const lowPass, std::shared_ptr<HighPass> const highPass) {
-      return std::make_unique<Bandpass>(lowPass, highPass);
+  friend std::unique_ptr<Bandpass> operator+ (
+    std::shared_ptr<LowPass> const lowPass,
+    std::shared_ptr<HighPass> const highPass)
+  {
+    return std::make_unique<Bandpass>(lowPass, highPass);
   }
   
   virtual double Frequency() const = 0;
