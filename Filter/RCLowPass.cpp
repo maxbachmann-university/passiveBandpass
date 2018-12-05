@@ -9,7 +9,7 @@ RCLowPass::RCLowPass(double firstComponent, double secondComponent)
 
 double RCLowPass::Frequency() const 
 {
-    return 1 / ( 2 * PI * m_firstComponent->returnValue() 
-        * m_secondComponent->returnValue() );
+    return 1 / ( 2 * PI * m_firstComponent->getValue() 
+        * m_secondComponent->getValue() );
 }
 

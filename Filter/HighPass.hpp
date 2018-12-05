@@ -23,8 +23,8 @@ public:
 
 protected:
   HighPass() {};
-  std::unique_ptr<Component> m_firstComponent;
-  std::unique_ptr<Component> m_secondComponent;
+  std::shared_ptr<Component> m_firstComponent;
+  std::shared_ptr<Component> m_secondComponent;
     
 };
 #endif //HIGHPASS_HPP

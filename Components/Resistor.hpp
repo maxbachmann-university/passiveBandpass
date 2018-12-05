@@ -8,7 +8,7 @@ class Resistor : public Component
 public:
   Resistor(double value);
 
-  /*friend std::unique_ptr<Resistor> operator+ (
+  friend std::unique_ptr<Resistor> operator+ (
     std::shared_ptr<Resistor> const Component1,
     std::shared_ptr<Resistor> const Component2);
 
@@ -18,6 +18,6 @@ public:
 
   friend double operator/ (
     std::shared_ptr<Resistor> const Component1,
-    std::shared_ptr<Resistor> const Component2);*/
+    std::shared_ptr<Resistor> const Component2);
 };
 #endif //RESISTOR_HPP
