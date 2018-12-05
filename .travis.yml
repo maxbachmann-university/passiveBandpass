@@ -16,5 +16,5 @@ addons:
       - valgrind
 
 script:
-  - g++ -o travis_gcc_cpp17 Catch2.cpp Components/*.cpp Filter/*.cpp
+  - g++-8 -o travis_gcc_cpp17 Catch2.cpp Components/*.cpp Filter/*.cpp -std=c++14
   - valgrind --leak-check=yes ./travis_gcc_cpp17
