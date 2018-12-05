@@ -1,7 +1,7 @@
 language: cpp
 
 compiler:
-  - gcc-8
+  - gcc
 
 addons:
   apt:
@@ -11,6 +11,5 @@ addons:
       - valgrind
 
 script:
-  - gcc --version
-  - g++ -o travis_gcc_cpp17 Catch2.cpp Components/*.cpp Filter/*.cpp -std=c++17
+  - g++ -o travis_gcc_cpp17 Catch2.cpp Components/*.cpp Filter/*.cpp
   - valgrind --leak-check=yes ./travis_gcc_cpp17
