@@ -6,7 +6,7 @@
 class Capacitor : public Component 
 {
 public:
-  Capacitor(double value);
+  explicit Capacitor(double value);
 
   friend std::unique_ptr<Capacitor> operator+ (
     std::shared_ptr<Capacitor> const Component1,

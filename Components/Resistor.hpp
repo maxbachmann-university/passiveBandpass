@@ -6,7 +6,7 @@
 class Resistor : public Component 
 {
 public:
-  Resistor(double value);
+  explicit Resistor(double value);
 
   friend std::unique_ptr<Resistor> operator+ (
     std::shared_ptr<Resistor> const Component1,
