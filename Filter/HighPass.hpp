@@ -1,12 +1,10 @@
 #ifndef HIGHPASS_HPP
 #define HIGHPASS_HPP
 
-#include "Filter.hpp"
+#include "PassFilter.hpp"
 
-class Bandpass;
-class LowPass;
 
-class HighPass: public Filter 
+class HighPass: public PassFilter 
 {
 public:
   virtual ~HighPass() = default;
@@ -15,16 +13,10 @@ public:
   HighPass(const HighPass&) = default;
   HighPass& operator=(const HighPass&) = default;
 
-  virtual double Frequency() const = 0;
-
-  friend std::unique_ptr<Bandpass> operator+ ( 
-    std::shared_ptr<HighPass> const highPass,
-    std::shared_ptr<LowPass> const lowPass);
+  virtual double Frequency() const override = 0;
 
 protected:
   HighPass() {};
-  std::shared_ptr<Component> m_firstComponent;
-  std::shared_ptr<Component> m_secondComponent;
     
 };
 #endif //HIGHPASS_HPP

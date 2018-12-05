@@ -101,6 +101,8 @@ SCENARIO( "+ operator for LowPass", "[LowPass]" ) {
         std::unique_ptr<Bandpass> bandpass3 = lcLowPass + clHighPass2;
 
         double TopCap = bandpass->returnTopCap();
+        std::cout << TopCap;
+        
 
         /*std::shared_ptr<Capacitor> Cap1 = std::make_shared<Capacitor>(5);
         //std::shared_ptr<Inductor> Ind1 = std::make_shared<Inductor>(6);
