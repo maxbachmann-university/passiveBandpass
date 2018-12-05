@@ -8,7 +8,7 @@ class Capacitor : public Component
 public:
   Capacitor(double value);
 
-  /*friend std::unique_ptr<Capacitor> operator+ (
+  friend std::unique_ptr<Capacitor> operator+ (
     std::shared_ptr<Capacitor> const Component1,
     std::shared_ptr<Capacitor> const Component2);
 
@@ -18,6 +18,6 @@ public:
 
   friend double operator/ (
     std::shared_ptr<Capacitor> const Component1,
-    std::shared_ptr<Capacitor> const Component2);*/
+    std::shared_ptr<Capacitor> const Component2);
 };
 #endif //CAPACITOR_HPP

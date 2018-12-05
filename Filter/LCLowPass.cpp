@@ -9,7 +9,7 @@ LCLowPass::LCLowPass(double firstComponent, double secondComponent)
 
 double LCLowPass::Frequency() const
 {
-    return 1 / ( 2 * PI * sqrt(m_firstComponent->returnValue()
-      * m_secondComponent->returnValue()));
+    return 1 / ( 2 * PI * sqrt(m_firstComponent->getValue()
+      * m_secondComponent->getValue()));
 }
 

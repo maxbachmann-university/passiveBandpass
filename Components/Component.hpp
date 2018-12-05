@@ -13,15 +13,14 @@ public:
   Component(const Component&) = default;
   Component& operator=(const Component&) = default;
 
-  double returnValue() {return m_value; } const
-  void setValue(double value) { m_value = value; }
+  double getValue() const;
+  void setValue(double value);
 
 protected:
   Component() {};
-  Component(double value) : m_value(value) {};
 
 private:
-  double m_value = 0;
+  double m_value;
 
 };
 #endif //COMPONENT_HPP

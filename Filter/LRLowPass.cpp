@@ -9,8 +9,8 @@ LRLowPass::LRLowPass(double firstComponent, double secondComponent)
 
 double LRLowPass::Frequency() const 
 {
-    return m_secondComponent->returnValue() 
-        / ( 2 * PI * m_firstComponent->returnValue() );
+    return m_secondComponent->getValue() 
+        / ( 2 * PI * m_firstComponent->getValue() );
 }
 
   

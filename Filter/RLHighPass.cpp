@@ -9,6 +9,6 @@ RLHighPass::RLHighPass(double firstComponent, double secondComponent)
 
 double RLHighPass::Frequency() const 
 {
-    return m_firstComponent->returnValue() 
-        / ( 2 * PI * m_secondComponent->returnValue() );
+    return m_firstComponent->getValue() 
+        / ( 2 * PI * m_secondComponent->getValue() );
 }
