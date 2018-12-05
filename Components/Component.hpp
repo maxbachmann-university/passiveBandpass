@@ -17,10 +17,10 @@ public:
   void setValue(double value);
 
 protected:
-  explicit Component() {};
+  Component() {};
 
 private:
-  double m_value;
+  double m_value = 0;
 
 };
 #endif //COMPONENT_HPP
