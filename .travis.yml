@@ -7,10 +7,14 @@ addons:
   apt:
     update: true
 
+    sources:
+      - ubuntu-toolchain-r-test
+
     packages:
-      - gcc-6
+      - gcc-8
+      - g++-8
       - valgrind
 
 script:
-  - g++ -o travis_gcc_cpp17 Catch2.cpp Components/*.cpp Filter/*.cpp -std=c++1y
+  - g++ -o travis_gcc_cpp17 Catch2.cpp Components/*.cpp Filter/*.cpp -std=c++17
   - valgrind --leak-check=yes ./travis_gcc_cpp17
