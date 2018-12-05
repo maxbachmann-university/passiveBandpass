@@ -38,6 +38,8 @@
 
 #include "Filter/Bandpass.hpp"
 
+//#include "Filter/PassFilter.hpp"
+
 #include <memory>
 #include <math.h>
 
@@ -82,21 +84,25 @@ SCENARIO( "calculate Frequency for LowPass", "[LowPass]" ) {
 
 SCENARIO( "+ operator for LowPass", "[LowPass]" ) {
     GIVEN("Some Low Pass and High Pass Filters"){
-        /*double resistor = 5.9;
+        double resistor = 5.9;
         double capacitor = 10.3;
         double inductor = 0.5;
 
         std::shared_ptr<LowPass> lcLowPass = std::make_shared<LCLowPass>(inductor, capacitor);
 
-        std::shared_ptr<HighPass> clHighPass = 
-          std::make_shared<CLHighPass>(inductor, capacitor);
+        std::shared_ptr<HighPass> clHighPass = std::make_shared<CLHighPass>(inductor, capacitor);
+
+        std::shared_ptr<CLHighPass> clHighPass2 = std::make_shared<CLHighPass>(inductor, capacitor);
         
-        std::unique_ptr<Bandpass> bandpass = lcLowPass + clHighPass;
         std::unique_ptr<Bandpass> bandpass2 = clHighPass + lcLowPass;
 
-        double TopCap = bandpass->returnTopCap();*/
+        std::unique_ptr<Bandpass> bandpass = lcLowPass + clHighPass;
+        
+        std::unique_ptr<Bandpass> bandpass3 = lcLowPass + clHighPass2;
 
-        std::shared_ptr<Capacitor> Cap1 = std::make_shared<Capacitor>(5);
+        double TopCap = bandpass->returnTopCap();
+
+        /*std::shared_ptr<Capacitor> Cap1 = std::make_shared<Capacitor>(5);
         //std::shared_ptr<Inductor> Ind1 = std::make_shared<Inductor>(6);
 
         std::unique_ptr<Component> comp = Cap1 + Cap1;
@@ -107,7 +113,7 @@ SCENARIO( "+ operator for LowPass", "[LowPass]" ) {
 
 
         //std::unique_ptr<Bandpass> bandpass = std::make_unique<Bandpass>(std::move(lcLowPass), std::move(clHighPass));
-
+*/
         WHEN("Frequency is calculated") {
 
             THEN( "They are the same but not in the same position" ) {

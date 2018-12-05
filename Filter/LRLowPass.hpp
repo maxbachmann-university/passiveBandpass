@@ -6,17 +6,9 @@
 class LRLowPass: public LowPass 
 {
 public:
-  double Frequency() const override 
-  {
-      return m_secondComponent->returnValue() 
-        / ( 2 * PI * m_firstComponent->returnValue() );
-  }
+  double Frequency() const override;
 
-  LRLowPass(double firstComponent, double secondComponent) : LowPass()
-  {
-      m_firstComponent = std::make_unique<Inductor>(firstComponent);
-      m_secondComponent = std::make_unique<Resistor>(secondComponent);
-  }
+  LRLowPass(double firstComponent, double secondComponent);
 
 };
 #endif //LRLOWPASS_HPP

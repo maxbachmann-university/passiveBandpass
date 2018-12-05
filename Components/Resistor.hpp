@@ -6,31 +6,18 @@
 class Resistor : public Component 
 {
 public:
-  Resistor(double value) : Component(value) {}
+  Resistor(double value);
 
-  friend std::unique_ptr<Resistor> operator+ (
+  /*friend std::unique_ptr<Resistor> operator+ (
     std::shared_ptr<Resistor> const Component1,
-    std::shared_ptr<Resistor> const Component2)
-  {
-    return std::make_unique<Resistor>(
-      Component1->returnValue() 
-      + Component2->returnValue() );
-  }
+    std::shared_ptr<Resistor> const Component2);
 
   friend std::unique_ptr<Resistor> operator- (
     std::shared_ptr<Resistor> const Component1,
-    std::shared_ptr<Resistor> const Component2)
-  {
-    return std::make_unique<Resistor>( 
-      Component1->returnValue() 
-      - Component2->returnValue() );
-  }
+    std::shared_ptr<Resistor> const Component2);
 
   friend double operator/ (
     std::shared_ptr<Resistor> const Component1,
-    std::shared_ptr<Resistor> const Component2)
-  {
-    return Component1->returnValue() / Component2->returnValue();
-  }
+    std::shared_ptr<Resistor> const Component2);*/
 };
 #endif //RESISTOR_HPP
