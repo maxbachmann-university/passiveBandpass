@@ -6,7 +6,7 @@
 class Inductor : public Component 
 {
 public:
-  Inductor(double value);
+  explicit Inductor(double value);
 
   friend std::unique_ptr<Inductor> operator+ (
     std::shared_ptr<Inductor> const Component1,

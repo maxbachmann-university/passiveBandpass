@@ -17,7 +17,7 @@ public:
   void setValue(double value);
 
 protected:
-  Component() {};
+  explicit Component() {};
 
 private:
   double m_value;
