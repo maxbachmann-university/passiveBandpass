@@ -11,6 +11,6 @@ addons:
       - valgrind
 
 script:
-  - gcc-8 --version
+  - gcc --version
   - g++ -o travis_gcc_cpp17 Catch2.cpp Components/*.cpp Filter/*.cpp -std=c++17
   - valgrind --leak-check=yes ./travis_gcc_cpp17
