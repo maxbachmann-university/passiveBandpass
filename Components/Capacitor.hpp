@@ -6,31 +6,18 @@
 class Capacitor : public Component 
 {
 public:
-  Capacitor(double value) : Component(value) {}
+  Capacitor(double value);
 
-  friend std::unique_ptr<Capacitor> operator+ (
+  /*friend std::unique_ptr<Capacitor> operator+ (
     std::shared_ptr<Capacitor> const Component1,
-    std::shared_ptr<Capacitor> const Component2)
-  {
-    return std::make_unique<Capacitor>( 
-      Component1->returnValue() 
-      + Component2->returnValue() );
-  }
+    std::shared_ptr<Capacitor> const Component2);
 
   friend std::unique_ptr<Capacitor> operator- (
     std::shared_ptr<Capacitor> const Component1,
-    std::shared_ptr<Capacitor> const Component2)
-  {
-    return std::make_unique<Capacitor>( 
-      Component1->returnValue() 
-      - Component2->returnValue() );
-  }
+    std::shared_ptr<Capacitor> const Component2);
 
   friend double operator/ (
     std::shared_ptr<Capacitor> const Component1,
-    std::shared_ptr<Capacitor> const Component2)
-  {
-    return Component1->returnValue() / Component2->returnValue();
-  }
+    std::shared_ptr<Capacitor> const Component2);*/
 };
 #endif //CAPACITOR_HPP

@@ -6,16 +6,8 @@
 class RLHighPass: public HighPass 
 {
 public:
-  double Frequency() const override 
-  {
-      return m_firstComponent->returnValue() 
-        / ( 2 * PI * m_secondComponent->returnValue() );
-  }
+  double Frequency() const override;
 
-  RLHighPass(double firstComponent, double secondComponent) : HighPass() 
-  {
-      m_firstComponent = std::make_unique<Resistor>(firstComponent);
-      m_secondComponent = std::make_unique<Inductor>(secondComponent);
-  }
+  RLHighPass(double firstComponent, double secondComponent);
 };
 #endif //RLHIGHPASS_HPP

@@ -6,31 +6,18 @@
 class Inductor : public Component 
 {
 public:
-  Inductor(double value) : Component(value) {}
+  Inductor(double value);
 
-  friend std::unique_ptr<Inductor> operator+ (
+  /*friend std::unique_ptr<Inductor> operator+ (
     std::shared_ptr<Inductor> const Component1,
-    std::shared_ptr<Inductor> const Component2)
-  {
-    return std::make_unique<Inductor>( 
-      Component1->returnValue() 
-      + Component2->returnValue() );
-  }
+    std::shared_ptr<Inductor> const Component2);
 
   friend std::unique_ptr<Inductor> operator- (
     std::shared_ptr<Inductor> const Component1,
-    std::shared_ptr<Inductor> const Component2)
-  {
-    return std::make_unique<Inductor>( 
-      Component1->returnValue() 
-      - Component2->returnValue() );
-  }
+    std::shared_ptr<Inductor> const Component2);
 
   friend double operator/ (
     std::shared_ptr<Inductor> const Component1,
-    std::shared_ptr<Inductor> const Component2)
-  {
-    return Component1->returnValue() / Component2->returnValue();
-  }
+    std::shared_ptr<Inductor> const Component2);*/
 };
 #endif //INDUCTOR_HPP

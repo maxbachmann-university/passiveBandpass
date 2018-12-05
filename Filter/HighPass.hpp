@@ -2,10 +2,9 @@
 #define HIGHPASS_HPP
 
 #include "Filter.hpp"
-#include "LowPass.hpp"
 
-class LowPass;
 class Bandpass;
+class LowPass;
 
 class HighPass: public Filter 
 {
@@ -16,14 +15,11 @@ public:
   HighPass(const HighPass&) = default;
   HighPass& operator=(const HighPass&) = default;
 
+  virtual double Frequency() const = 0;
+
   friend std::unique_ptr<Bandpass> operator+ ( 
     std::shared_ptr<HighPass> const highPass,
-    std::shared_ptr<LowPass> const lowPass)
-  {
-    return std::make_unique<Bandpass>(lowPass, highPass);
-  }
-
-  virtual double Frequency() const = 0;
+    std::shared_ptr<LowPass> const lowPass);
 
 protected:
   HighPass() {};
