@@ -13,7 +13,8 @@ enum class FilterType ///< Caller IDs
 		HighPass,
 		LowPass,
     Bandpass,
-    combinedPassFilter
+    combinedHighPass,
+    combinedLowPass
 };
 
 class Filter 

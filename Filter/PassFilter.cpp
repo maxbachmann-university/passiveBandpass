@@ -1,7 +1,8 @@
 #include "PassFilter.hpp"
 
 #include "Bandpass.hpp"
-#include "combinedPassFilter.hpp"
+#include "combinedHighPass.hpp"
+#include "combinedLowPass.hpp"
 
 PassFilter::PassFilter(const FilterType type)
   : Filter(type) {}
@@ -31,7 +32,7 @@ std::unique_ptr<Filter> operator+ (
 {
     const FilterType type1 = Filter1->m_type;
     const FilterType type2 = Filter2->m_type;
-    std::unique_ptr<Filter> retFilter = nullptr;
+    std::unique_ptr<Filter> retFilter = {};
 
     //make_unique does not work when just friending the + operator
     if (type1 == FilterType::LowPass && type2 == FilterType::HighPass)
@@ -42,10 +43,16 @@ std::unique_ptr<Filter> operator+ (
     {
         retFilter = std::unique_ptr<Bandpass>(new Bandpass(Filter2, Filter1));
     }
-    else{
-        retFilter = std::unique_ptr<combinedPassFilter>(
-            new combinedPassFilter({Filter1, Filter2}));
+    else if (type1 == FilterType::HighPass)
+    {
+        retFilter = std::unique_ptr<combinedHighPass>(
+            new combinedHighPass({Filter1, Filter2}));
     }
+    else {
+        retFilter = std::unique_ptr<combinedLowPass>(
+            new combinedLowPass({Filter1, Filter2}));
+    }
+
     return retFilter;
 }
 
