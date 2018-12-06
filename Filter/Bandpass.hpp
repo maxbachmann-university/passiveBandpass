@@ -3,6 +3,7 @@
 #define BANDPASS_HPP
 
 #include "Filter.hpp"
+#include <math.h>
 
 class LowPass;
 class HighPass;
@@ -24,6 +25,9 @@ public:
 
   double returnTopCap() const;
   double returnBottomCap() const;
+  double returnBandwidth() const;
+  double returnResonanceFrequency() const;
+  double returnPerformance() const;
 
 private:
     std::shared_ptr<LowPass> m_LowPass;    //!< LowPass.
