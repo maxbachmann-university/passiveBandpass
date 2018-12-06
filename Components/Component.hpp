@@ -29,7 +29,7 @@ protected:
   Component() {}
 
 private:
-  double m_value = 0;    //!< Value of the Component.
+  double m_value{};    //!< Value of the Component.
 
 };
 #endif //COMPONENT_HPP
