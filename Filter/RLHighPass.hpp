@@ -1,9 +1,9 @@
 #ifndef RLHIGHPASS_HPP
 #define RLHIGHPASS_HPP
 
-#include "HighPass.hpp"
+#include "PassFilter.hpp"
 
-class RLHighPass: public HighPass 
+class RLHighPass: public PassFilter 
 {
 public:
   double Frequency() const override;

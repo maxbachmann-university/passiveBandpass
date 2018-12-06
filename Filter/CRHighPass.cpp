@@ -3,6 +3,7 @@
 CRHighPass::CRHighPass(
     double firstComponent,
     double secondComponent) 
+    : PassFilter(FilterType::HighPass) 
 {
     m_firstComponent = std::make_unique<Capacitor>(firstComponent);
     m_secondComponent = std::make_unique<Resistor>(secondComponent);

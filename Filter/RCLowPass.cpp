@@ -1,7 +1,7 @@
 #include "RCLowPass.hpp"
 
 RCLowPass::RCLowPass(double firstComponent, double secondComponent) 
-    : LowPass() 
+    : PassFilter(FilterType::LowPass) 
 {
     m_firstComponent = std::make_unique<Resistor>(firstComponent);
     m_secondComponent = std::make_unique<Capacitor>(secondComponent);

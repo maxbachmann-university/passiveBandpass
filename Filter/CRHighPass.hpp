@@ -1,9 +1,9 @@
 #ifndef CRHIGHPASS_HPP
 #define CRHIGHPASS_HPP
 
-#include "HighPass.hpp"
+#include "PassFilter.hpp"
 
-class CRHighPass: public HighPass {
+class CRHighPass: public PassFilter {
 public:
   double Frequency() const override;
 

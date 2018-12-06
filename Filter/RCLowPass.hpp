@@ -1,9 +1,9 @@
 #ifndef RCLOWPASS_HPP
 #define RCLOWPASS_HPP
 
-#include "LowPass.hpp"
+#include "PassFilter.hpp"
 
-class RCLowPass: public LowPass 
+class RCLowPass: public PassFilter 
 {
 public:
   double Frequency() const override;

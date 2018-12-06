@@ -1,7 +1,7 @@
 #include "RLHighPass.hpp"
 
 RLHighPass::RLHighPass(double firstComponent, double secondComponent) 
-    : HighPass() 
+    : PassFilter(FilterType::HighPass) 
 {
     m_firstComponent = std::make_unique<Resistor>(firstComponent);
     m_secondComponent = std::make_unique<Inductor>(secondComponent);

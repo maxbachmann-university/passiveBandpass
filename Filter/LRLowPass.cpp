@@ -1,7 +1,7 @@
 #include "LRLowPass.hpp"
 
 LRLowPass::LRLowPass(double firstComponent, double secondComponent) 
-    : LowPass()
+    : PassFilter(FilterType::LowPass) 
 {
     m_firstComponent = std::make_unique<Inductor>(firstComponent);
     m_secondComponent = std::make_unique<Resistor>(secondComponent);

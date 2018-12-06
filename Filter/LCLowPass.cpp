@@ -1,7 +1,7 @@
 #include "LCLowPass.hpp"
 
 LCLowPass::LCLowPass(double firstComponent, double secondComponent)
-    : LowPass() 
+    : PassFilter(FilterType::LowPass) 
 {
     m_firstComponent = std::make_unique<Inductor>(firstComponent);
     m_secondComponent = std::make_unique<Capacitor>(secondComponent);
