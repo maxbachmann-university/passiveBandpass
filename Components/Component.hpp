@@ -16,7 +16,6 @@ class Capacitor;
 class Component 
 {
 public:
-
   virtual ~Component() = default;
   Component(Component&&) = default;
   Component& operator=(Component&&) = default;

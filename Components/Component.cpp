@@ -11,6 +11,7 @@ double Component::getValue() const
     return m_value; 
 }
 
+
 /**
  * Sets the value of Component.
  *
