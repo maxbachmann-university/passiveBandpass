@@ -17,3 +17,4 @@ class Filter
 
 };
 #endif //FILTER_HPP
+

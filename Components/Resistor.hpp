@@ -29,3 +29,4 @@ public:
     std::shared_ptr<Resistor> const Component2);
 };
 #endif //RESISTOR_HPP
+

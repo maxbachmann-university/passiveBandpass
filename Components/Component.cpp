@@ -21,3 +21,4 @@ void Component::setValue(double value)
 {
     m_value = value;
 }
+

@@ -12,3 +12,4 @@ double RLHighPass::Frequency() const
     return m_firstComponent->getValue() 
         / ( 2 * PI * m_secondComponent->getValue() );
 }
+

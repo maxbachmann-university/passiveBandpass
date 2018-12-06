@@ -12,3 +12,4 @@ public:
   //CLHighPass(std::shared_ptr<Component> m_firstComponent, std::shared_ptr<Component> m_secondComponent;);
 };
 #endif //RLHIGHPASS_HPP
+

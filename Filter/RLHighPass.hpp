@@ -11,3 +11,4 @@ public:
   RLHighPass(double firstComponent, double secondComponent);
 };
 #endif //RLHIGHPASS_HPP
+

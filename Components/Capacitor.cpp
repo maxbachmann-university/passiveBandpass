@@ -71,3 +71,4 @@ double operator/ (
 {
     return Component1->getValue() / Component2->getValue();
 }
+

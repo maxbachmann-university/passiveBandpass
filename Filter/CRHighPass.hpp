@@ -10,3 +10,4 @@ public:
   CRHighPass(double firstComponent, double secondComponent);
 };
 #endif //CRHIGHPASS_HPP
+

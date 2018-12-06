@@ -11,4 +11,5 @@ Bandpass::Bandpass(
 double Bandpass::returnTopCap() const
 {
     return m_LowPass->Frequency();
-};
+}
+

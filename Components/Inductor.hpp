@@ -29,3 +29,4 @@ public:
     std::shared_ptr<Inductor> const Component2);
 };
 #endif //INDUCTOR_HPP
+

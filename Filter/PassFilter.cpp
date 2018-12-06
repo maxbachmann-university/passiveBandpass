@@ -17,3 +17,4 @@ std::unique_ptr<Bandpass> operator+ (
 {
     return std::make_unique<Bandpass>(lowPass, highPass);
 }
+
