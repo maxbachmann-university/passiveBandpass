@@ -7,6 +7,13 @@ class Bandpass;
 class HighPass;
 class LowPass;
 
+/**
+ * @brief       Class for basic operators.
+ * @details     This class provides some basic operators to both kind of filters.
+ * @author      Maximilian Bachmann <bachmann.maxim-tfe17@it.dhbw-ravensburg.de>
+ * @author      Felix Bandle <bandle.felix-tfe17@it.dhbw-ravensburg.de>
+ * @author      Florian Vetter <vetter.florian-tfe17@it.dhbw-ravensburg.de>
+ */
 class PassFilter: public Filter 
 {
 public:
