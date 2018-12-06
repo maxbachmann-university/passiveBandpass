@@ -16,7 +16,7 @@ public:
   virtual double Frequency() const override = 0;
 
 protected:
-  HighPass() {};
+  HighPass() {}
     
 };
 #endif //HIGHPASS_HPP

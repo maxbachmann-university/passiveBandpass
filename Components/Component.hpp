@@ -26,7 +26,7 @@ public:
   void setValue(double value);
 
 protected:
-  Component() {};
+  Component() {}
 
 private:
   double m_value = 0;    //!< Value of the Component.

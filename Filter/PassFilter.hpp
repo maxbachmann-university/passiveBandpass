@@ -10,6 +10,11 @@ class LowPass;
 class PassFilter: public Filter 
 {
 public:
+  virtual ~PassFilter() = default;
+  PassFilter(PassFilter&&) = default;
+  PassFilter& operator=(PassFilter&&) = default;
+  PassFilter(const PassFilter&) = default;
+  PassFilter& operator=(const PassFilter&) = default;
 
   friend std::unique_ptr<Bandpass> operator+ (
     std::shared_ptr<LowPass> const lowPass,
@@ -22,6 +27,7 @@ public:
   virtual double Frequency() const = 0;
 
 protected:
+  PassFilter(){}
   std::unique_ptr<Component> m_firstComponent;
   std::unique_ptr<Component> m_secondComponent;
     
