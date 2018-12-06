@@ -17,11 +17,17 @@ enum class FilterType ///< Caller IDs
 
 class Filter 
 {
-  private:
+public:
+  virtual ~Filter() = default;
+  Filter(Filter&&) = default;
+  Filter& operator=(Filter&&) = default;
+  Filter(const Filter&) = default;
+  Filter& operator=(const Filter&) = default;
 
   const FilterType m_type; ///< The identifier of the specific type (e.g. HighPass)
     
-  public:
+protected:
+  Filter(const FilterType type):m_type(type){}
 
 
 };
