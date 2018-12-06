@@ -15,11 +15,6 @@ class Capacitor : public Component
 {
 public:
   explicit Capacitor(double value);    //!< Value of the Capacitor.
-=======
-class Capacitor : public Component 
-{
-public:
-  explicit Capacitor(double value);
 
   friend std::unique_ptr<Capacitor> operator+ (
     std::shared_ptr<Capacitor> const Component1,
