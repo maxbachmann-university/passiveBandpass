@@ -88,21 +88,24 @@ SCENARIO( "+ operator for LowPass", "[LowPass]" ) {
         double capacitor = 10.3;
         double inductor = 0.5;
 
-        /*std::shared_ptr<LowPass> lcLowPass = std::make_shared<LCLowPass>(inductor, capacitor);
+        std::shared_ptr<PassFilter> lcLowPass = std::make_shared<LCLowPass>(inductor, capacitor);
 
-        std::shared_ptr<HighPass> clHighPass = std::make_shared<CLHighPass>(inductor, capacitor);
+        std::shared_ptr<PassFilter> clHighPass = std::make_shared<CLHighPass>(inductor, capacitor);
 
         std::shared_ptr<CLHighPass> clHighPass2 = std::make_shared<CLHighPass>(inductor, capacitor);
         
-        std::unique_ptr<Bandpass> bandpass2 = clHighPass + lcLowPass;
+        std::unique_ptr<Filter> bandpass2 = clHighPass + lcLowPass;
 
-        std::unique_ptr<Bandpass> bandpass = lcLowPass + clHighPass;
+        std::shared_ptr<Filter> bandpass = lcLowPass + clHighPass;
         
-        std::unique_ptr<Bandpass> bandpass3 = lcLowPass + clHighPass2;
+        //std::unique_ptr<Bandpass> bandpass3 = lcLowPass + clHighPass2;
 
-        double TopCap = bandpass->returnTopCap();
-        std::cout << TopCap;
-        */
+        if (bandpass->m_type == FilterType::Bandpass){
+            std::shared_ptr<Bandpass> newBandpass = std::static_pointer_cast<Bandpass>(bandpass);
+            double TopCap = newBandpass->returnTopCap();
+            std::cout << TopCap;
+        }
+        
 
         /*std::shared_ptr<Capacitor> Cap1 = std::make_shared<Capacitor>(5);
         //std::shared_ptr<Inductor> Ind1 = std::make_shared<Inductor>(6);
