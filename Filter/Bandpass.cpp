@@ -36,3 +36,33 @@ double Bandpass::returnBottomCap() const
 {
     return m_HighPass->Frequency();
 }
+
+/**
+ * Returns the Bandwidth.
+ *
+ * @return   The Bandwidth.
+ */
+double Bandpass::returnBandwidth() const
+{
+    return m_LowPass->Frequency() - m_HighPass->Frequency();
+}
+
+/**
+ * Returns the Bandwidth.
+ *
+ * @return   The Bandwidth.
+ */
+double Bandpass::returnResonanceFrequency() const
+{
+    return sqrt(m_LowPass->Frequency() * m_HighPass->Frequency());
+}
+
+/**
+ * Returns the Performance.
+ *
+ * @return   The Performance.
+ */
+double Bandpass::returnPerformance() const
+{
+    return returnResonanceFrequency() / returnBandwidth();
+}
