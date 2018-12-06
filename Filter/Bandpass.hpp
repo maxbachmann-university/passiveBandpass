@@ -23,10 +23,11 @@ public:
     std::shared_ptr<HighPass> highPass);
 
   double returnTopCap() const;
+  double returnBottomCap() const;
 
 private:
-    std::shared_ptr<LowPass> m_LowPass;
-    std::shared_ptr<HighPass> m_HighPass;
+    std::shared_ptr<LowPass> m_LowPass;    //!< LowPass.
+    std::shared_ptr<HighPass> m_HighPass;  //!< HighPass.
 
 };
 #endif //BANDPASS_HPP

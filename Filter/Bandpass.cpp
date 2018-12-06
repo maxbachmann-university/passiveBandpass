@@ -27,3 +27,12 @@ double Bandpass::returnTopCap() const
     return m_LowPass->Frequency();
 }
 
+/**
+ * Returns the Bottom Frequenz.
+ *
+ * @return   The Bottom Frequenz.
+ */
+double Bandpass::returnBottomCap() const
+{
+    return m_HighPass->Frequency();
+}
