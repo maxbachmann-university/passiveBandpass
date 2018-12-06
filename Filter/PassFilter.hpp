@@ -27,7 +27,7 @@ public:
   virtual double Frequency() const = 0;
 
 protected:
-  PassFilter(){}
+  PassFilter() = default;
   std::unique_ptr<Component> m_firstComponent;
   std::unique_ptr<Component> m_secondComponent;
     

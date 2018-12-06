@@ -15,7 +15,7 @@ public:
   virtual double Frequency() const override = 0;
 
 protected:
-  LowPass() {}
+  LowPass() = default;
     
 };
 #endif //LOWPASS_HPP
