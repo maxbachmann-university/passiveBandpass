@@ -21,7 +21,7 @@ public:
   PassFilter(const PassFilter&) = default;
   PassFilter& operator=(const PassFilter&) = default;
 
-  static std::unique_ptr<Filter> combinedFilter(
+  static std::unique_ptr<Filter> combineFilters(
     std::shared_ptr<PassFilter> const Filter1,
     std::shared_ptr<PassFilter> const Filter2);
 

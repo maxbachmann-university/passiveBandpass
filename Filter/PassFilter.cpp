@@ -1,12 +1,13 @@
 #include "PassFilter.hpp"
 
 #include "Bandpass.hpp"
+#include "combinedPassFilter.hpp"
 
 PassFilter::PassFilter(const FilterType type)
   : Filter(type) {}
 
 
-std::unique_ptr<Filter> PassFilter::combinedFilter( 
+std::unique_ptr<Filter> PassFilter::combineFilters( 
     std::shared_ptr<PassFilter> const Filter1,
     std::shared_ptr<PassFilter> const Filter2)
 {
@@ -41,11 +42,9 @@ std::unique_ptr<Filter> operator+ (
     {
         retFilter = std::unique_ptr<Bandpass>(new Bandpass(Filter2, Filter1));
     }
-    else if (type1 == FilterType::LowPass){
-        //Pointer to combined Filter two LowPass
-    }
     else{
-        //Pointer to combined Filter two HighPass
+        retFilter = std::unique_ptr<combinedPassFilter>(
+            new combinedPassFilter({Filter1, Filter2}));
     }
     return retFilter;
 }

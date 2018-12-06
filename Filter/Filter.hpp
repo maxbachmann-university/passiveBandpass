@@ -12,7 +12,8 @@ enum class FilterType ///< Caller IDs
 	: std::uint8_t {
 		HighPass,
 		LowPass,
-    Bandpass
+    Bandpass,
+    combinedPassFilter
 };
 
 class Filter 
