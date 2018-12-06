@@ -29,4 +29,3 @@ public:
     std::shared_ptr<Capacitor> const Component2);
 };
 #endif //CAPACITOR_HPP
-
