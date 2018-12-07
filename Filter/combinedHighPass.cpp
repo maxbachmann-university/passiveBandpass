@@ -1,10 +1,20 @@
 #include "combinedHighPass.hpp"
 #include "PassFilter.hpp"
 
+/**
+ * Constructor for a combined HighPass.
+ *
+ * @param   passFilters     Vector of multiple passFilters..
+ */
 combinedHighPass::combinedHighPass(
     std::vector<std::shared_ptr<PassFilter> > passFilters)
     : Filter(FilterType::combinedHighPass), m_PassFilters(passFilters){}
 
+/**
+ * Method for returning all Filter frequencies.
+ *
+ * @return Frequencies of all Filters in a vector.
+ */
 std::vector<double> combinedHighPass::Frequencies() const{
     std::vector<double> retValues;
     retValues.reserve(m_PassFilters.size());
@@ -14,6 +24,14 @@ std::vector<double> combinedHighPass::Frequencies() const{
     return retValues;
 }
 
+/**
+ * Operator to combine two Filters.
+ *
+ * @param   Filter1     Combined Filter..
+ * @param   Filter2     PassFilter.
+ * 
+ * @return New combined HighPass.
+ */
 std::unique_ptr<combinedHighPass> operator+ (
     std::shared_ptr<combinedHighPass> const Filter1,
     std::shared_ptr<PassFilter> const Filter2)
@@ -24,6 +42,14 @@ std::unique_ptr<combinedHighPass> operator+ (
         new combinedHighPass(a));
 }
 
+/**
+ * Operator to combine two Filters.
+ *
+ * @param   Filter1     PassFilter.
+ * @param   Filter2     Combined Filter.
+ * 
+ * @return New combined HighPass.
+ */
 std::unique_ptr<combinedHighPass> operator+ (
     std::shared_ptr<PassFilter> const Filter1,
     std::shared_ptr<combinedHighPass> const Filter2)
@@ -31,6 +57,14 @@ std::unique_ptr<combinedHighPass> operator+ (
     return Filter2 + Filter1;
 }
 
+/**
+ * Operator to combine two Filters.
+ *
+ * @param   Filter1     Combined Filter.
+ * @param   Filter2     Combined Filter.
+ * 
+ * @return New combined HighPass.
+ */
 std::unique_ptr<combinedHighPass> operator+ (
     std::shared_ptr<combinedHighPass> const Filter1,
     std::shared_ptr<combinedHighPass> const Filter2)

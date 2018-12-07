@@ -5,7 +5,7 @@
  *
  * This Project is part of a series by Christian Ege in the informatics lesson of the DHBW Ravensburg Campus Friedrichshafen.
  * The tasks are worked out together in a team up to 3 People. In this Case Felix Bandle, Maximilian Bachmann and Florian Vetter worked together for the solution.
- * The deadline for the project is set on the 30. october 2018.
+ * The deadline for the project is set on the 09. december 2018.
  *
  * 
  * 

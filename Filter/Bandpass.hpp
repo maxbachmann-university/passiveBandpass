@@ -29,8 +29,8 @@ private:
     std::shared_ptr<PassFilter> Filter1,
     std::shared_ptr<PassFilter> Filter2);
 
-  std::shared_ptr<PassFilter> m_LowPass;
-  std::shared_ptr<PassFilter> m_HighPass;
+  std::shared_ptr<PassFilter> m_LowPass;    //!< Holds a LowPass.
+  std::shared_ptr<PassFilter> m_HighPass;   //!< Holds a HighPass.
 
   friend std::unique_ptr<Filter> operator+ (
     std::shared_ptr<PassFilter> const Filter1,

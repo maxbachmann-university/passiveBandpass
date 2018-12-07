@@ -4,10 +4,23 @@
 #include "combinedHighPass.hpp"
 #include "combinedLowPass.hpp"
 
+/**
+ * Constructor for a Filter.
+ *
+ * @param   FilterType      The type of a Filter.
+ * 
+ */
 PassFilter::PassFilter(const FilterType type)
   : Filter(type) {}
 
-
+/**
+ * Method for combining two Filters.
+ *
+ * @param   Filter1      First Filter.
+ * @param   Filter2      Second Filter.
+ * 
+ * @return New combined Filter.
+ */
 std::unique_ptr<Filter> PassFilter::combineFilters( 
     std::shared_ptr<PassFilter> const Filter1,
     std::shared_ptr<PassFilter> const Filter2)
