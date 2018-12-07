@@ -20,7 +20,8 @@ std::unique_ptr<combinedLowPass> operator+ (
 {
     auto a = Filter1->m_PassFilters;
     a.push_back(Filter2);
-    return std::make_unique<combinedLowPass>(a);
+    return std::unique_ptr<combinedLowPass>(
+        new combinedLowPass(a));
 }
 
 std::unique_ptr<combinedLowPass> operator+ (
@@ -38,5 +39,6 @@ std::unique_ptr<combinedLowPass> operator+ (
     const auto b = Filter2->m_PassFilters;
     
     a.insert(std::end(a), std::begin(b), std::end(b));
-    return std::make_unique<combinedLowPass>(a);
+    return std::unique_ptr<combinedLowPass>(
+        new combinedLowPass(a));
 }
