@@ -49,107 +49,322 @@
 #include "catch2/catch.hpp"
 
 
+SCENARIO( "calculate resistor networks", "[Resistor]" ) {
+    GIVEN("Some resistors"){
+        std::shared_ptr<Resistor> R1 = std::make_shared<Resistor>(5);
+        std::shared_ptr<Resistor> R2 = std::make_shared<Resistor>(10);
+        std::shared_ptr<Resistor> R3 = std::make_shared<Resistor>(10);
+
+        Resistor R4(5);
+        Resistor R5(10);
+        Resistor R6(10);
+
+        REQUIRE(R1->getValue() == 5);
+        REQUIRE(R2->getValue() == 10);
+        REQUIRE(R3->getValue() == 10);
+        REQUIRE(R4.getValue() == 5);
+        REQUIRE(R5.getValue() == 10);
+        REQUIRE(R6.getValue() == 10);
 
 
-SCENARIO( "calculate Frequency for LowPass", "[LowPass]" ) {
-    GIVEN("Some Low Pass Filters"){
-        double resistor = 5.9;
-        double capacitor = 10.3;
-        double inductor = 0.5;
+        WHEN("series connection using &&") {
+            std::shared_ptr<Resistor> Rout1 = R1 && R2;
+            Resistor Rout2 = R4 && R5;
 
-        /*std::unique_ptr<LowPass> lcLowPass = 
-          std::make_unique<LCLowPass>(inductor, capacitor);
-        std::unique_ptr<LowPass> lrLowPass = 
-          std::make_unique<LRLowPass>(inductor, resistor);
-        std::unique_ptr<LowPass> rcLowPass = 
-          std::make_unique<RCLowPass>(resistor, capacitor);*/
-
-        WHEN("Frequency is calculated") {
-            //double lcFrequency = lcLowPass->Frequency();
-            //double lrFrequency = lrLowPass->Frequency();
-            //double rcFrequency = rcLowPass->Frequency();
-
-            THEN( "They are the same but not in the same position" ) {
-               /* REQUIRE( 
-                    fabs(lcFrequency - 0.07013204731) <= eps * fabs(lcFrequency) );
-                REQUIRE(
-                    fabs(lrFrequency - 1.878028328) <= eps * fabs(lrFrequency) );
-                REQUIRE(
-                    fabs(rcFrequency - 2.618972241e-3) <= eps * fabs(rcFrequency) );*/
+            THEN( "They both have the value 15" ) {
+                REQUIRE(fabs(Rout1->getValue() - 15) 
+                   <= eps * fabs(Rout1->getValue()) );
+                REQUIRE(fabs(Rout2.getValue() - 15) 
+                   <= eps * fabs(Rout2.getValue()) );
             }
         }
 
+        WHEN("parallel connection using ||") {
+            std::shared_ptr<Resistor> Rout1 = R2 || R3;
+            Resistor Rout2 = R5 || R6;
+
+            THEN( "They both have the value 5" ) {
+                REQUIRE(fabs(Rout1->getValue() - 5) 
+                   <= eps * fabs(Rout1->getValue()) );
+                REQUIRE(fabs(Rout2.getValue() - 5) 
+                   <= eps * fabs(Rout2.getValue()) );
+            }
+        }
+
+        WHEN("series connection then parallel") {
+            std::shared_ptr<Resistor> Rout1 = R1 && R2 || R3;
+            Resistor Rout2 = R4 && R5 || R6;
+
+            THEN( "They both have the value 6" ) {
+                REQUIRE(fabs(Rout1->getValue() - 6) 
+                   <= eps * fabs(Rout1->getValue()) );
+                REQUIRE(fabs(Rout2.getValue() - 6) 
+                   <= eps * fabs(Rout2.getValue()) );
+            }
+        }
+
+        WHEN("parallel connection then series") {
+            std::shared_ptr<Resistor> Rout1 = R1 && (R2 || R3);
+            Resistor Rout2 = R4 && (R5 || R6);
+
+            THEN( "They both have the value 10" ) {
+                REQUIRE(fabs(Rout1->getValue() - 10) 
+                   <= eps * fabs(Rout1->getValue()) );
+                REQUIRE(fabs(Rout2.getValue() - 10) 
+                   <= eps * fabs(Rout2.getValue()) );
+            }
+        }
+
+        WHEN("R is comparedusing ==") {
+            bool out1 = R1 == R2;
+            bool out2 = R2 == R3;
+            bool out3 = R4 == R5;
+            bool out4 = R5 == R6;
+
+            THEN( "They all have their corresponding bool value" ) {
+                REQUIRE(out1 == false);
+                REQUIRE(out2 == true);
+                REQUIRE(out3 == false);
+                REQUIRE(out4 == true);
+            }
+        }
+
+        WHEN("R is comparedusing !=") {
+            bool out1 = R1 != R2;
+            bool out2 = R2 != R3;
+            bool out3 = R4 != R5;
+            bool out4 = R5 != R6;
+
+            THEN( "They all have their corresponding bool value" ) {
+                REQUIRE(out1 == true);
+                REQUIRE(out2 == false);
+                REQUIRE(out3 == true);
+                REQUIRE(out4 == false);
+            }
+        }
+
+        WHEN("Two resistors are divided") {
+            double out1 = R2 / R3;
+            double out2 = R5 / R6;
+
+            THEN( "They are both 1" ) {
+                REQUIRE(out1 == 1);
+                REQUIRE(out2 == 1);
+            }
+        }
     }
 }
 
-SCENARIO( "+ operator for LowPass", "[LowPass]" ) {
-    GIVEN("Some Low Pass and High Pass Filters"){
-        double resistor = 5.9;
-        double capacitor = 10.3;
-        double inductor = 0.5;
 
-        std::shared_ptr<PassFilter> lcLowPass = std::make_shared<LCLowPass>(inductor, capacitor);
+SCENARIO( "calculate inductor networks", "[Inductor]" ) {
+    GIVEN("Some inductors"){
+        std::shared_ptr<Inductor> L1 = std::make_shared<Inductor>(5);
+        std::shared_ptr<Inductor> L2 = std::make_shared<Inductor>(10);
+        std::shared_ptr<Inductor> L3 = std::make_shared<Inductor>(10);
 
-        std::shared_ptr<PassFilter> clHighPass = std::make_shared<CLHighPass>(inductor, capacitor);
+        Inductor L4(5);
+        Inductor L5(10);
+        Inductor L6(10);
 
-        std::shared_ptr<CLHighPass> clHighPass2 = std::make_shared<CLHighPass>(inductor, capacitor);
-        
-        std::unique_ptr<Filter> bandpass2 = clHighPass + lcLowPass;
-
-        std::shared_ptr<Filter> bandpass = lcLowPass + clHighPass;
-        
-        //std::unique_ptr<Bandpass> bandpass3 = lcLowPass + clHighPass2;
-
-        if (bandpass->m_type == FilterType::Bandpass){
-            std::shared_ptr<Bandpass> newBandpass = std::static_pointer_cast<Bandpass>(bandpass);
-            double TopCap = newBandpass->returnTopCap();
-            std::cout << TopCap;
-        }
-        
-
-        /*std::shared_ptr<Capacitor> Cap1 = std::make_shared<Capacitor>(5);
-        //std::shared_ptr<Inductor> Ind1 = std::make_shared<Inductor>(6);
-
-        std::unique_ptr<Component> comp = Cap1 + Cap1;
-        //std::unique_ptr<Component> comp = 5 + Cap1;
-        //std::unique_ptr<Component> com2 = Ind1 + Ind1;
-        std::cout <<  "Test: "<< comp->returnValue() <<std::endl;
-        //std::cout <<  "Test: "<< com2->returnValue();
+        REQUIRE(L1->getValue() == 5);
+        REQUIRE(L2->getValue() == 10);
+        REQUIRE(L3->getValue() == 10);
+        REQUIRE(L4.getValue() == 5);
+        REQUIRE(L5.getValue() == 10);
+        REQUIRE(L6.getValue() == 10);
 
 
-        //std::unique_ptr<Bandpass> bandpass = std::make_unique<Bandpass>(std::move(lcLowPass), std::move(clHighPass));
-*/
-        WHEN("Frequency is calculated") {
+        WHEN("series connection using &&") {
+            std::shared_ptr<Inductor> Lout1 = L1 && L2;
+            Inductor Lout2 = L4 && L5;
 
-            THEN( "They are the same but not in the same position" ) {
+            THEN( "They both have the value 15" ) {
+                REQUIRE(fabs(Lout1->getValue() - 15) 
+                   <= eps * fabs(Lout1->getValue()) );
+                REQUIRE(fabs(Lout2.getValue() - 15) 
+                   <= eps * fabs(Lout2.getValue()) );
             }
         }
 
+        WHEN("parallel connection using ||") {
+            std::shared_ptr<Inductor> Lout1 = L2 || L3;
+            Inductor Lout2 = L5 || L6;
+
+            THEN( "They both have the value 5" ) {
+                REQUIRE(fabs(Lout1->getValue() - 5) 
+                   <= eps * fabs(Lout1->getValue()) );
+                REQUIRE(fabs(Lout2.getValue() - 5) 
+                   <= eps * fabs(Lout2.getValue()) );
+            }
+        }
+
+        WHEN("series connection then parallel") {
+            std::shared_ptr<Inductor> Lout1 = L1 && L2 || L3;
+            Inductor Lout2 = L4 && L5 || L6;
+
+            THEN( "They both have the value 6" ) {
+                REQUIRE(fabs(Lout1->getValue() - 6) 
+                   <= eps * fabs(Lout1->getValue()) );
+                REQUIRE(fabs(Lout2.getValue() - 6) 
+                   <= eps * fabs(Lout2.getValue()) );
+            }
+        }
+
+        WHEN("parallel connection then series") {
+            std::shared_ptr<Inductor> Lout1 = L1 && (L2 || L3);
+            Inductor Lout2 = L4 && (L5 || L6);
+
+            THEN( "They both have the value 10" ) {
+                REQUIRE(fabs(Lout1->getValue() - 10) 
+                   <= eps * fabs(Lout1->getValue()) );
+                REQUIRE(fabs(Lout2.getValue() - 10) 
+                   <= eps * fabs(Lout2.getValue()) );
+            }
+        }
+
+        WHEN("L is compared using ==") {
+            bool out1 = L1 == L2;
+            bool out2 = L2 == L3;
+            bool out3 = L4 == L5;
+            bool out4 = L5 == L6;
+
+            THEN( "They all have their corresponding bool value" ) {
+                REQUIRE(out1 == false);
+                REQUIRE(out2 == true);
+                REQUIRE(out3 == false);
+                REQUIRE(out4 == true);
+            }
+        }
+
+        WHEN("L is comparedusing !=") {
+            bool out1 = L1 != L2;
+            bool out2 = L2 != L3;
+            bool out3 = L4 != L5;
+            bool out4 = L5 != L6;
+
+            THEN( "They all have their corresponding bool value" ) {
+                REQUIRE(out1 == true);
+                REQUIRE(out2 == false);
+                REQUIRE(out3 == true);
+                REQUIRE(out4 == false);
+            }
+        }
+
+        WHEN("Two inductors are divided") {
+            double out1 = L2 / L3;
+            double out2 = L5 / L6;
+
+            THEN( "They are both 1" ) {
+                REQUIRE(out1 == 1);
+                REQUIRE(out2 == 1);
+            }
+        }
     }
 }
 
-SCENARIO( "calculate Frequency for HighPass", "[HighPass]" ) {
-    GIVEN("Some High Pass Filters"){
-        double resistor = 5.9;
-        double capacitor = 10.3;
-        double inductor = 0.5;
+SCENARIO( "calculate capacitor networks", "[Capacitor]" ) {
+    GIVEN("Some capacitors"){
+        std::shared_ptr<Capacitor> C1 = std::make_shared<Capacitor>(5);
+        std::shared_ptr<Capacitor> C2 = std::make_shared<Capacitor>(10);
+        std::shared_ptr<Capacitor> C3 = std::make_shared<Capacitor>(10);
 
-        //std::unique_ptr<HighPass> clHighPass = std::make_unique<CLHighPass>(inductor, capacitor);
-        // std::unique_ptr<HighPass> rlHighPass = std::make_unique<RLHighPass>(inductor, resistor);
-        // std::unique_ptr<HighPass> crHighPass = std::make_unique<CRHighPass>(resistor, capacitor);
+        Capacitor C4(5);
+        Capacitor C5(10);
+        Capacitor C6(10);
 
-        WHEN("Frequency is calculated") {
-            // double clFrequency = clHighPass->Frequency();
-            // double rlFrequency = rlHighPass->Frequency();
-            // double crFrequency = crHighPass->Frequency();
+        REQUIRE(C1->getValue() == 5);
+        REQUIRE(C2->getValue() == 10);
+        REQUIRE(C3->getValue() == 10);
+        REQUIRE(C4.getValue() == 5);
+        REQUIRE(C5.getValue() == 10);
+        REQUIRE(C6.getValue() == 10);
 
-            THEN( "They are the same but not in the same position" ) {
-               // REQUIRE( fabs(clFrequency - 0.07013204731) <= eps * fabs(clFrequency) );
-                //REQUIRE( fabs(rlFrequency - 1.878028328) <= eps * fabs(rlFrequency) );
-                //REQUIRE( fabs(crFrequency - 2.618972241e-3) <= eps * fabs(crFrequency) );
+
+        WHEN("series connection using &&") {
+            std::shared_ptr<Capacitor> Cout1 = C2 && C3;
+            Capacitor Cout2 = C5 && C6;
+
+            THEN( "They both have the value 5" ) {
+                REQUIRE(fabs(Cout1->getValue() - 5) 
+                   <= eps * fabs(Cout1->getValue()) );
+                REQUIRE(fabs(Cout2.getValue() - 5) 
+                   <= eps * fabs(Cout2.getValue()) );
             }
         }
 
+        WHEN("parallel connection using ||") {
+            std::shared_ptr<Capacitor> Cout1 = C1 || C2;
+            Capacitor Cout2 = C4 || C5;
+
+            THEN( "They both have the value 15" ) {
+                REQUIRE(fabs(Cout1->getValue() - 15) 
+                   <= eps * fabs(Cout1->getValue()) );
+                REQUIRE(fabs(Cout2.getValue() - 15) 
+                   <= eps * fabs(Cout2.getValue()) );
+            }
+        }
+
+        WHEN("parallel connection then series") {
+            std::shared_ptr<Capacitor> Cout1 = C2 && (C3 || C1);
+            Capacitor Cout2 = C5 && (C6 || C4);
+
+            THEN( "They both have the value 6" ) {
+                REQUIRE(fabs(Cout1->getValue() - 6) 
+                   <= eps * fabs(Cout1->getValue()) );
+                REQUIRE(fabs(Cout2.getValue() - 6) 
+                   <= eps * fabs(Cout2.getValue()) );
+            }
+        }
+
+        WHEN("series connection then parallel") {
+            std::shared_ptr<Capacitor> Cout1 = C2 && C3 || C1;
+            Capacitor Cout2 = C5 && C6 || C4;
+
+            THEN( "They both have the value 10" ) {
+                REQUIRE(fabs(Cout1->getValue() - 10) 
+                   <= eps * fabs(Cout1->getValue()) );
+                REQUIRE(fabs(Cout2.getValue() - 10) 
+                   <= eps * fabs(Cout2.getValue()) );
+            }
+        }
+
+        WHEN("C is comparedusing ==") {
+            bool out1 = C1 == C2;
+            bool out2 = C2 == C3;
+            bool out3 = C4 == C5;
+            bool out4 = C5 == C6;
+
+            THEN( "They all have their corresponding bool value" ) {
+                REQUIRE(out1 == false);
+                REQUIRE(out2 == true);
+                REQUIRE(out3 == false);
+                REQUIRE(out4 == true);
+            }
+        }
+
+        WHEN("C is comparedusing !=") {
+            bool out1 = C1 != C2;
+            bool out2 = C2 != C3;
+            bool out3 = C4 != C5;
+            bool out4 = C5 != C6;
+
+            THEN( "They all have their corresponding bool value" ) {
+                REQUIRE(out1 == true);
+                REQUIRE(out2 == false);
+                REQUIRE(out3 == true);
+                REQUIRE(out4 == false);
+            }
+        }
+
+        WHEN("Two capacitors are divided") {
+            double out1 = C2 / C3;
+            double out2 = C5 / C6;
+
+            THEN( "They are both 1" ) {
+                REQUIRE(out1 == 1);
+                REQUIRE(out2 == 1);
+            }
+        }
     }
 }
 

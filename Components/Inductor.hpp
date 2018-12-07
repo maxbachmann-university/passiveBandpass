@@ -16,17 +16,45 @@ class Inductor : public Component
 public:
   explicit Inductor(double value);    //!< Value of the Inductor.
 
-  friend std::unique_ptr<Inductor> operator+ (
+  friend std::unique_ptr<Inductor> operator&& (
     std::shared_ptr<Inductor> const Component1,
     std::shared_ptr<Inductor> const Component2);
 
-  friend std::unique_ptr<Inductor> operator- (
+  friend std::unique_ptr<Inductor> operator|| (
+    std::shared_ptr<Inductor> const Component1,
+    std::shared_ptr<Inductor> const Component2);
+
+  friend bool operator== (
+    std::shared_ptr<Inductor> const Component1,
+    std::shared_ptr<Inductor> const Component2);
+
+  friend bool operator!= (
+    std::shared_ptr<Inductor> const Component1,
+    std::shared_ptr<Inductor> const Component2);
+
+  friend Inductor operator&& (
+    Inductor const Component1,
+    Inductor const Component2);
+
+  friend Inductor operator|| (
+    Inductor const Component1,
+    Inductor const Component2);
+
+  friend bool operator== (
+    Inductor const Component1,
+    Inductor const Component2);
+
+  friend bool operator!= (
+    Inductor const Component1,
+    Inductor const Component2);
+    
+  friend double operator/ (
     std::shared_ptr<Inductor> const Component1,
     std::shared_ptr<Inductor> const Component2);
 
   friend double operator/ (
-    std::shared_ptr<Inductor> const Component1,
-    std::shared_ptr<Inductor> const Component2);
+    Inductor const Component1,
+    Inductor const Component2);
 };
 #endif //INDUCTOR_HPP
 

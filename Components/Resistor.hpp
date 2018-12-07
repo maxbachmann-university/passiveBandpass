@@ -16,17 +16,45 @@ class Resistor : public Component
 public:
   explicit Resistor(double value);    //!< Value of the Resistor.
 
-  friend std::unique_ptr<Resistor> operator+ (
+  friend std::unique_ptr<Resistor> operator&& (
     std::shared_ptr<Resistor> const Component1,
     std::shared_ptr<Resistor> const Component2);
 
-  friend std::unique_ptr<Resistor> operator- (
+  friend std::unique_ptr<Resistor> operator|| (
     std::shared_ptr<Resistor> const Component1,
     std::shared_ptr<Resistor> const Component2);
+
+  friend bool operator== (
+    std::shared_ptr<Resistor> const Component1,
+    std::shared_ptr<Resistor> const Component2);
+
+  friend bool operator!= (
+    std::shared_ptr<Resistor> const Component1,
+    std::shared_ptr<Resistor> const Component2);
+
+  friend Resistor operator&& (
+    Resistor const Component1,
+    Resistor const Component2);
+
+  friend Resistor operator|| (
+    Resistor const Component1,
+    Resistor const Component2);
+
+  friend bool operator== (
+    Resistor const Component1,
+    Resistor const Component2);
+
+  friend bool operator!= (
+    Resistor const Component1,
+    Resistor const Component2);
 
   friend double operator/ (
     std::shared_ptr<Resistor> const Component1,
     std::shared_ptr<Resistor> const Component2);
+
+  friend double operator/ (
+    Resistor const Component1,
+    Resistor const Component2);
 };
 #endif //RESISTOR_HPP
 
