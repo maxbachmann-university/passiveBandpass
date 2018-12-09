@@ -58,9 +58,10 @@ double Bandpass::returnResonanceFrequency() const
 }
 
 /**
- * Returns the Performance.
+ * calculates the Performance
  *
- * @return   The Performance.
+ * @param   returnValue     Reference to a double holding the Performance
+ * @return wether the output value would have been bigger then double max
  */
 bool Bandpass::returnPerformance(double& returnValue) const
 {

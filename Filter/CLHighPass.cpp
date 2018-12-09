@@ -13,7 +13,7 @@
 CLHighPass::CLHighPass(
     double firstComponent,
     double secondComponent)
-        : PassFilter(FilterType::HighPass) 
+    : PassFilter(FilterType::HighPass) 
 {
     m_firstComponent = std::make_unique<Capacitor>(firstComponent);
     m_secondComponent = std::make_unique<Inductor>(secondComponent);
