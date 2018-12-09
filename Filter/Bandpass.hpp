@@ -4,6 +4,7 @@
 
 #include "Filter.hpp"
 #include <math.h>
+#include <limits>
 
 class PassFilter;
 
@@ -22,7 +23,7 @@ public:
   double returnBottomCap() const;
   double returnBandwidth() const;
   double returnResonanceFrequency() const;
-  double returnPerformance() const;
+  bool returnPerformance(double& returnValue) const;
 
 private:
   Bandpass(

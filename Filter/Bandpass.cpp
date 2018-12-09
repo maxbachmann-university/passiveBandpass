@@ -1,6 +1,7 @@
 /** @file */
 #include "Bandpass.hpp"
 #include "PassFilter.hpp"
+#include <iostream>
 
 /**
  * Constructor for Bandpass with a start value.
@@ -61,7 +62,18 @@ double Bandpass::returnResonanceFrequency() const
  *
  * @return   The Performance.
  */
-double Bandpass::returnPerformance() const
+bool Bandpass::returnPerformance(double& returnValue) const
 {
-    return returnResonanceFrequency() / returnBandwidth();
+    double min = 1 / (std::numeric_limits<double>::max() 
+        / returnResonanceFrequency());
+
+    if (min >= returnBandwidth())
+    {
+        returnValue = std::numeric_limits<double>::max();
+        return 0;
+    }
+    else{
+        returnValue = returnResonanceFrequency() / returnBandwidth();
+        return 1;
+    }
 }

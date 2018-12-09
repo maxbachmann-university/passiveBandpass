@@ -37,17 +37,25 @@
 #include "Filter/CRHighPass.hpp"
 
 #include "Filter/Bandpass.hpp"
+#include "Filter/combinedHighPass.hpp"
+#include "Filter/combinedLowPass.hpp"
 
-//#include "Filter/PassFilter.hpp"
 
 #include <memory>
 #include <math.h>
+#include <limits>
+#include <vector>
 
 #define eps 1.19e-7f
 
 #define CATCH_CONFIG_MAIN
 #include "catch2/catch.hpp"
 
+
+template<typename TO, typename FROM>
+std::unique_ptr<TO> static_unique_pointer_cast (std::unique_ptr<FROM>&& old){
+    return std::unique_ptr<TO>{static_cast<TO*>(old.release())};
+}
 
 SCENARIO( "calculate resistor networks", "[Resistor]" ) {
     GIVEN("Some resistors"){
@@ -356,13 +364,99 @@ SCENARIO( "calculate capacitor networks", "[Capacitor]" ) {
             }
         }
 
-        WHEN("Two capacitors are divided") {
+        WHEN("Two capacitors are divided") 
+        {
             double out1 = C2 / C3;
             double out2 = C5 / C6;
 
-            THEN( "They are both 1" ) {
+            THEN( "They are both 1" ) 
+            {
                 REQUIRE(out1 == 1);
                 REQUIRE(out2 == 1);
+            }
+        }
+    }
+}
+
+SCENARIO( "create some combined Filters", "[PassFilter]" )
+{
+    GIVEN("Some PassFilters")
+    {
+        double conductor = 5;
+        double inductor = 10;
+        double resistor = 20;
+
+
+        auto crHighPass = std::make_shared<CRHighPass>(conductor, resistor);
+        auto clHighPass = std::make_shared<CLHighPass>(conductor, inductor);
+        auto rlHighPass = std::make_shared<RLHighPass>(resistor, inductor);
+
+        auto rcLowPass = std::make_shared<RCLowPass>(resistor, conductor);
+        auto lcLowPass = std::make_shared<LCLowPass>(inductor, conductor);
+        auto lrLowPass = std::make_shared<LRLowPass>(inductor, resistor);
+
+        REQUIRE(fabs(crHighPass->Frequency() - 1.591549431e-3f) 
+                   <= eps * fabs(crHighPass->Frequency()) );
+        REQUIRE(fabs(clHighPass->Frequency() - 0.0225079079f) 
+                   <= eps * fabs(clHighPass->Frequency()) );
+        REQUIRE(fabs(rlHighPass->Frequency() - 0.3183098862f) 
+                   <= eps * fabs(rlHighPass->Frequency()) );
+
+        REQUIRE(fabs(rcLowPass->Frequency() - 1.591549431e-3f) 
+                   <= eps * fabs(rcLowPass->Frequency()) );
+        REQUIRE(fabs(lcLowPass->Frequency() - 0.0225079079f) 
+                   <= eps * fabs(lcLowPass->Frequency()) );
+        REQUIRE(fabs(lrLowPass->Frequency() - 0.3183098862f) 
+                   <= eps * fabs(lrLowPass->Frequency()) );
+
+
+        WHEN("Two PassFilters (High + Low) are connected in series") 
+        {
+            auto bandpass1 =
+                static_unique_pointer_cast<Bandpass>(crHighPass + rcLowPass);
+            auto bandpass2 = 
+                static_unique_pointer_cast<Bandpass>(clHighPass + lcLowPass);
+            auto bandpass3 = 
+                static_unique_pointer_cast<Bandpass>(lrLowPass + rlHighPass);
+
+            double Performance;
+            bool calcPerformance = bandpass1->returnPerformance(Performance);
+
+            THEN( "They have the sam top/bottom frequency as the single Filters") 
+            {
+                REQUIRE(crHighPass->Frequency() == bandpass1->returnBottomCap());
+                REQUIRE(rcLowPass->Frequency() == bandpass1->returnTopCap());
+
+                REQUIRE(clHighPass->Frequency() == bandpass2->returnBottomCap());
+                REQUIRE(lcLowPass->Frequency() == bandpass2->returnTopCap());
+
+                REQUIRE(rlHighPass->Frequency() == bandpass3->returnBottomCap());
+                REQUIRE(lrLowPass->Frequency() == bandpass3->returnTopCap());
+
+                REQUIRE(bandpass1->returnBandwidth() == 0);
+                REQUIRE(bandpass1->returnResonanceFrequency() == crHighPass->Frequency());
+                REQUIRE(Performance == std::numeric_limits<double>::max());
+                REQUIRE(calcPerformance == 0);
+            }
+        }
+
+        WHEN("Two PassFilters (same) are connected in series") 
+        {
+            auto CombinedLowPass =
+                static_unique_pointer_cast<combinedLowPass>(rcLowPass + rcLowPass);
+            auto CombinedHighPass = 
+                static_unique_pointer_cast<combinedHighPass>(clHighPass + clHighPass);
+
+            std::vector<double> frequencies1 = CombinedLowPass->Frequencies();
+            std::vector<double> frequencies2 = CombinedHighPass->Frequencies();
+
+
+            THEN( "They have the sam top/bottom frequency as the single Filters") 
+            {
+                REQUIRE(rcLowPass->Frequency() == frequencies1[0]);
+                REQUIRE(rcLowPass->Frequency() == frequencies1[1]);
+                REQUIRE(clHighPass->Frequency() == frequencies2[0]);
+                REQUIRE(clHighPass->Frequency() == frequencies2[1]);
             }
         }
     }

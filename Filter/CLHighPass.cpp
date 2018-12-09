@@ -29,6 +29,6 @@ CLHighPass::CLHighPass(
  */
 double CLHighPass::Frequency() const 
 {
-    return m_secondComponent->getValue() 
-      / (2 * PI * m_firstComponent->getValue());
+    return 1 / ( 2 * PI * sqrt(m_firstComponent->getValue()
+      * m_secondComponent->getValue()));
 }
