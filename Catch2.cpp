@@ -7,7 +7,9 @@
  * The tasks are worked out together in a team up to 3 People. In this Case Felix Bandle, Maximilian Bachmann and Florian Vetter worked together for the solution.
  * The deadline for the project is set on the 09. december 2018.
  *
+ * \section Task3
  * 
+ * In this task we had to describe a Bandpass with c++ and class relations. The goal was to be able to create a Bandpass with several items.
  * 
  * \section Catch2
  * 
