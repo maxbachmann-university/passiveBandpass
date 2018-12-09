@@ -1,19 +1,71 @@
 #include "PassFilter.hpp"
 
-#include "HighPass.hpp"
-#include "LowPass.hpp"
 #include "Bandpass.hpp"
+#include "combinedHighPass.hpp"
+#include "combinedLowPass.hpp"
 
-std::unique_ptr<Bandpass> operator+ ( 
-    std::shared_ptr<HighPass> const highPass,
-    std::shared_ptr<LowPass> const lowPass)
+/**
+ * Constructor for a Filter.
+ *
+ * @param   FilterType      The type of a Filter.
+ * 
+ */
+PassFilter::PassFilter(const FilterType type)
+  : Filter(type) {}
+
+/**
+ * Method for combining two Filters.
+ *
+ * @param   Filter1      First Filter.
+ * @param   Filter2      Second Filter.
+ * 
+ * @return New combined Filter.
+ */
+std::unique_ptr<Filter> PassFilter::combineFilters( 
+    std::shared_ptr<PassFilter> const Filter1,
+    std::shared_ptr<PassFilter> const Filter2)
 {
-    return std::make_unique<Bandpass>(lowPass, highPass);
+    return Filter1 + Filter2;
 }
 
-std::unique_ptr<Bandpass> operator+ (
-    std::shared_ptr<LowPass> const lowPass,
-    std::shared_ptr<HighPass> const highPass)
+/**
+ * Operator for combining a highPass and a lowPass Filter.
+ * <p>
+ * Creates and returns a Bandpass with a highPass and lowPass.
+ * </p>
+ *
+ * @param   highPass      HighPass.
+ * @param   lowPass       LowPass.
+ * 
+ * @return Bandpass.
+ */
+std::unique_ptr<Filter> operator+ ( 
+    std::shared_ptr<PassFilter> const Filter1,
+    std::shared_ptr<PassFilter> const Filter2)
 {
-    return std::make_unique<Bandpass>(lowPass, highPass);
+    const FilterType type1 = Filter1->m_type;
+    const FilterType type2 = Filter2->m_type;
+    std::unique_ptr<Filter> retFilter = {};
+
+    //make_unique does not work when just friending the + operator
+    if (type1 == FilterType::LowPass && type2 == FilterType::HighPass)
+    {
+        retFilter = std::unique_ptr<Bandpass>(new Bandpass(Filter1, Filter2));
+    }
+    else if (type1 == FilterType::HighPass && type2 == FilterType::LowPass)
+    {
+        retFilter = std::unique_ptr<Bandpass>(new Bandpass(Filter2, Filter1));
+    }
+    else if (type1 == FilterType::HighPass)
+    {
+        retFilter = std::unique_ptr<combinedHighPass>(
+            new combinedHighPass({Filter1, Filter2}));
+    }
+    else {
+        retFilter = std::unique_ptr<combinedLowPass>(
+            new combinedLowPass({Filter1, Filter2}));
+    }
+
+    return retFilter;
 }
+
