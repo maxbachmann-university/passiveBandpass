@@ -78,3 +78,4 @@ bool Bandpass::returnPerformance(double& returnValue) const
         return 1;
     }
 }
+

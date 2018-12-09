@@ -57,3 +57,4 @@ public:
     Capacitor const Component2);
 };
 #endif //CAPACITOR_HPP
+

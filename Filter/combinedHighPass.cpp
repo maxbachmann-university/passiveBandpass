@@ -76,3 +76,4 @@ std::unique_ptr<combinedHighPass> operator+ (
     return std::unique_ptr<combinedHighPass>(
         new combinedHighPass(a));
 }
+

@@ -77,3 +77,4 @@ std::unique_ptr<combinedLowPass> operator+ (
     return std::unique_ptr<combinedLowPass>(
         new combinedLowPass(a));
 }
+
